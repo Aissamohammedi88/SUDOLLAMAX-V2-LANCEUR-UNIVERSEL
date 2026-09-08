@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUDOLLAMAX v2 — Universal AI Model Launcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a0033 50%, #2d0052 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            border-bottom: 2px solid #00d9ff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #00d9ff, #7000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+        }
+        
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00d9ff, #7000ff);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00d9ff;
+            border: 2px solid #00d9ff;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 4rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: #00d9ff;
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            color: #00d9ff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+        
+        .engines {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+        
+        .engines h2 {
+            color: #00d9ff;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .engine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .engine-badge {
+            background: rgba(112, 0, 255, 0.2);
+            border: 1px solid #7000ff;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .engine-badge:hover {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: #00d9ff;
+        }
+        
+        .engine-badge strong {
+            color: #00d9ff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-start {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #00d9ff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .quick-start h3 {
+            color: #00d9ff;
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background: #000;
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #333;
+        }
+        
+        .code-block code {
+            color: #00d9ff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 3rem 0;
+            margin-top: 5rem;
+            text-align: center;
+            color: #808080;
+        }
+        
+        .footer-content {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: #00d9ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #7000ff;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>⚡ SUDOLLAMAX v2</h1>
+            <p class="subtitle">Universal AI Model Launcher — One Command To Rule Them All</p>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h2 class="hero-title">🚀 Run ANY AI Model with ZERO Configuration</h2>
+                <p class="hero-subtitle">
+                    Automatically detect GPU, install dependencies, and execute models in any format.
+                    HuggingFace, PyTorch, TensorFlow, ONNX, TensorRT, JAX, GGUF — all supported.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#quick-start" class="btn btn-primary">🚀 Get Started</a>
+                    <a href="https://github.com/Aissamohammedi88/SUDOLLAMAX-V2-LANCEUR-UNIVERSEL" class="btn btn-secondary">⭐ View on GitHub</a>
+                </div>
+            </section>
+            
+            <section class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Auto Detection</h3>
+                    <p>Automatically detects NVIDIA CUDA, AMD ROCm, Apple Metal, or CPU. No manual configuration needed.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Smart Dependencies</h3>
+                    <p>Installs ONLY the dependencies you need. Minimal footprint (5.5 GB total with all engines).</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>7 Engines</h3>
+                    <p>Support for HuggingFace, PyTorch, TensorFlow, ONNX, TensorRT, JAX, and GGUF models.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Cross-Platform</h3>
+                    <p>Works on Linux, macOS (M1/M2/M3 Metal support), and Windows. One codebase for all.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>GPU Optimization</h3>
+                    <p>Native TensorRT support for NVIDIA. FP16 quantization. Multi-GPU capabilities.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Production Ready</h3>
+                    <p>API server mode, streaming support, benchmarking tools, and comprehensive logging.</p>
+                </div>
+            </section>
+            
+            <section class="engines">
+                <h2>🚀 Supported Engines</h2>
+                <div class="engine-grid">
+                    <div class="engine-badge">
+                        <strong>🤗 HuggingFace</strong>
+                        <span>LLaMA, Mistral, Phi</span>
+                    </div>
+                    <div class="engine-badge">
+                        <strong>🔥 PyTorch</strong>
+                        <span>Custom models</span>
+                    </div>
+                    <div class="engine-badge">
+                        <strong>📊 TensorFlow</strong>
+                        <span>Keras legacy</span>
+                    </div>
+                    <div class="engine-badge">
+                        <strong>📦 ONNX</strong>
+                        <span>Cross-platform</span>
+                    </div>
+                    <div class="engine-badge">
+                        <strong>⚡ TensorRT</strong>
+                        <span>NVIDIA optimized</span>
+                    </div>
+                    <div class="engine-badge">
+                        <strong>🚀 JAX</strong>
+                        <span>High performance</span>
+                    </div>
+                    <div class="engine-badge">
+                        <strong>🦙 GGUF</strong>
+                        <span>CPU efficient</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="quick-start" id="quick-start">
+                <h3>⚡ Quick Start</h3>
+                
+                <h4 style="color: #00d9ff; margin-top: 1.5rem;">1. Clone Repository</h4>
+                <div class="code-block">
+                    <code>git clone https://github.com/Aissamohammedi88/SUDOLLAMAX-V2-LANCEUR-UNIVERSEL.git
+cd SUDOLLAMAX-V2-LANCEUR-UNIVERSEL</code>
+                </div>
+                
+                <h4 style="color: #00d9ff; margin-top: 1.5rem;">2. Create Virtual Environment</h4>
+                <div class="code-block">
+                    <code>python3 -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate      # Windows</code>
+                </div>
+                
+                <h4 style="color: #00d9ff; margin-top: 1.5rem;">3. Install Dependencies</h4>
+                <div class="code-block">
+                    <code>pip install -r requirements.txt</code>
+                </div>
+                
+                <h4 style="color: #00d9ff; margin-top: 1.5rem;">4. Run Any Model</h4>
+                <div class="code-block">
+                    <code># HuggingFace
+python sudollamax.py /path/to/model
+
+# PyTorch
+python sudollamax.py model.pt
+
+# GGUF (CPU)
+python sudollamax.py model.gguf</code>
+                </div>
+            </section>
+            
+            <section class="quick-start">
+                <h3>📊 What Happens Automatically</h3>
+                <div class="code-block">
+                    <code>🔍 Detecting GPU: NVIDIA CUDA 12.0
+📦 Installing dependencies for HuggingFace...
+✅ torch (CUDA)
+✅ transformers
+✅ accelerate
+🤗 Loading HuggingFace model...
+✅ Model ready for inference!
+
+Performance: 45.2 tokens/sec | VRAM: 8.2 GB | GPU Util: 95%</code>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 SUDOLLAMAX v2 — Universal AI Model Launcher</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Engineered by Aissam Mohammed</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/Aissamohammedi88/SUDOLLAMAX-V2-LANCEUR-UNIVERSEL">GitHub</a>
+                <a href="https://github.com/Aissamohammedi88/SUDOLLAMAX-V2-LANCEUR-UNIVERSEL/issues">Issues</a>
+                <a href="https://github.com/Aissamohammedi88/SUDOLLAMAX-V2-LANCEUR-UNIVERSEL/wiki">Wiki</a>
+                <a href="https://github.com/Aissamohammedi88/SUDOLLAMAX-V2-LANCEUR-UNIVERSEL/blob/main/LICENSE">License</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
