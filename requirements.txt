@@ -1,0 +1,28 @@
+# Core
+Python>=3.8
+
+# Frameworks (optionnels, installés selon le modèle)
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+tensorflow>=2.13.0
+transformers>=4.30.0
+acccelerate>=0.20.0
+onnx>=1.14.0
+onnxruntime>=1.16.0
+nvidia-tensorrt>=8.6.0
+jax>=0.4.0
+jaxlib>=0.4.0
+llama-cpp-python>=0.2.0
+
+# Utilities
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+huggingface-hub>=0.16.0
+sentencepiece>=0.1.99
+protobuf>=3.20.0
+
+# CLI & Logging
+click>=8.1.0
+rich>=13.0.0
